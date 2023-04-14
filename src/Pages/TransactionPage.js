@@ -23,14 +23,13 @@ const TransactionPage = () => {
               alignItems="center"
               justifyContent="center"
               textAlign="center"
-              p={2}
+              pt={2}
               m={3}
               borderRadius="md"
               border="1.5px solid black"
               alignSelf={{ base: "center", md: "flex-start" }}
               //borderBottom="0.8em solid #D53F8C"
-              borderBottom="0.8em solid #805AD5
-            "
+              // borderBottom="0.8em solid #805AD5"
             >
               <Main />
             </Box>

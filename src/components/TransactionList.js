@@ -8,25 +8,17 @@ import { FaBitcoin } from "react-icons/fa";
 import { List, ListItem, IconButton } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/toast";
 import { useNavigate } from "react-router-dom";
+import { FaHistory } from "react-icons/fa";
+import btc from "../assets/btc.png";
+import usdt from "../assets/usdt.png";
+import bnb from "../assets/bnb.png";
+import usdc from "../assets/usdc.png";
+import matic from "../assets/matic.png";
+import { Image } from "@chakra-ui/react";
 
 const TransactionList = () => {
   const { transactions, deleteTransaction, findTransaction } =
     useContext(BudgetContext);
-  const toast = useToast();
-  const navigate = useNavigate();
-
-  const deleteHandler = (id) => {
-    console.log("delete clicked", id);
-    deleteTransaction(id);
-    //() => deleteTransaction(transaction.id);
-    toast({
-      title: "Transaction Deleted",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      position: "bottom",
-    });
-  };
 
   return (
     <List
@@ -34,16 +26,61 @@ const TransactionList = () => {
       flexDir="column"
       // gap="0.8em"
       //py={1}
-      px={2}
+      p={3}
       alignItems="center"
       justifyContent="start"
-      maxH="14em"
-      overflow="auto"
+      // maxH="20em"
+      // overflow="auto"
       //bg="purple.500"
       width="100%"
-      borderRadius="0.45em"
+      bg="#1e1a2b"
+      // borderRadius="0.45em"
+      borderTopRadius="0.9em"
       //border="1px solid black"
     >
+
+      <Box
+        className="midCard"
+        d="flex"
+        justifyContent="space-around"
+        alignItems="center"
+        width="90%"
+        bg="#232234"
+        py="3"
+        mx="auto"
+        borderRadius="1em"
+        style={{position:"relative", marginTop: "-45px"}}
+       >
+        <Box 
+        >
+        <Icon color="gray.100" as={FaHistory} />
+        {/* <Icon as={TbSend} /> */}
+          <Text
+          size="lg"
+          color="gray.100"
+          >
+          Send</Text>
+        </Box>
+        <Text color="white" fontWeight={"light"} fontSize="40px">|</Text>
+       <Box>
+       <Icon color="gray.100" as={"FaHistory"} />
+        <Text
+        size="lg"
+        color="gray.100"
+        >
+        Recieved</Text>
+       </Box>
+       <Text color="white" fontWeight={"light"} fontSize="40px">|</Text>
+       <Box>
+        <Icon color="gray.100" as={"FaHistory"} />
+        <Text
+        size="lg"
+        color="gray.100"
+        >
+        History</Text>
+       </Box>
+      </Box>
+
       {transactions.map((transaction) => (
         <ListItem
           key={transaction.id}
@@ -51,12 +88,13 @@ const TransactionList = () => {
           alignItems="center"
           justifyContent="space-between"
           borderRadius="0.4em"
-          border="1px solid black"
-          bg="yellow.300"
+          // border="1px solid black"
+          // bg="yellow.300"
+          bg="#1e1a2b"
           width="100%"
           p={1.5}
           cursor="pointer"
-          _hover={{ background: "yellow.400" }}
+          _hover={{ background: "#232234" }}
         >
           <Box
             d="flex"
@@ -70,7 +108,17 @@ const TransactionList = () => {
               color="white"
               fontSize="xl"
             >
-              <Icon as={FaRupeeSign} />
+              {transaction.category=="BTC"?
+              <Image src={btc} borderRadius="50%" alt='Dan Abramov' />
+              : transaction.category=="USDT"?
+              <Image src={usdt} borderRadius="50%" alt='Dan Abramov' />
+              : transaction.category=="BNB"?
+              <Image src={bnb} borderRadius="50%" alt='Dan Abramov' />
+              : transaction.category=="USDC"?
+              <Image src={usdc} borderRadius="50%" alt='Dan Abramov' />
+              :
+              <Image src={matic} borderRadius="50%" alt='Dan Abramov' />
+              }
             </Circle>
             <Box
               d="flex"
@@ -80,43 +128,39 @@ const TransactionList = () => {
               gap="1.75px"
             >
               <Box d="flex">
-              <Text fontWeight="bold" color="white" fontSize="lg">
+              <Text fontWeight="bold" color="#f1f1f1" fontSize="lg">
                 {transaction.category}
               </Text>
-              <Text fontWeight="bold" fontSize="sm" alignSelf="center" ms="2">
-              {transaction.amount}</Text>
+              <Text fontWeight="bold" fontSize="sm" alignSelf="center" ms="2"
+                color={transaction.percent<0? "#d74144": "#0e8c72"}
+                >
+                {transaction.percent}</Text>
               </Box>
               
-              <Text alignItems="left" fontWeight="bold" fontSize="xs">
+              <Text alignItems="left" color="#858897" fontWeight="bold" fontSize="xs">
                 {`$${transaction.amount}`}
               </Text>
             </Box>
           </Box>
           
           <Box>
-            <IconButton
-              variant="ghost"
-              bg="gray.700"
-              color="white"
-              size="lg"
-              fontSize="2xl"
-              _hover={{ background: "gray.700", color: "blue.400" }}
-              aria-label="Delete Transaction"
-              icon={<EditIcon />}
-              mr={2}
-              onClick={/* findTransaction.bind(null, transaction.id) */ ()=>findTransaction(transaction.id)}
-            />
-            <IconButton
-              variant="ghost"
-              bg="gray.700"
-              color="white"
-              size="lg"
-              fontSize="2xl"
-              _hover={{ background: "gray.800", color: "red.500" }}
-              aria-label="Delete Transaction"
-              icon={<DeleteIcon />}
-              onClick={deleteHandler.bind(null, transaction.id)}
-            />
+
+
+          <Box
+              d="flex"
+              flexDir="column"
+              gap="1.75px"
+            >
+              <Box d="flex">
+              <Text fontWeight="bold" alignItems="left" fontSize="sm" color="#f1f1f1" alignSelf="center" ms="2">
+                0
+              </Text>
+              </Box>
+              
+              <Text alignItems="left" color="#858897" fontWeight="bold" fontSize="xs">
+                {`$0`}
+              </Text>
+            </Box>
           </Box>
         </ListItem>
       ))}
