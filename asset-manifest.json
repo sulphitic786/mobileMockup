@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/github.io/mobileMockup/static/css/main.dcfd07d1.css",
+    "main.js": "/github.io/mobileMockup/static/js/main.52d44224.js",
+    "static/media/bg2.png": "/github.io/mobileMockup/static/media/bg2.5cf16d94f2b804250230.png",
+    "static/media/usdt.png": "/github.io/mobileMockup/static/media/usdt.c1f949f13939fcce6a89.png",
+    "static/media/usdc.png": "/github.io/mobileMockup/static/media/usdc.749746cd8926ebaab254.png",
+    "static/media/bnb.png": "/github.io/mobileMockup/static/media/bnb.2111c0df08022b478be0.png",
+    "static/media/matic.png": "/github.io/mobileMockup/static/media/matic.bae5e828f5f8af6dc6c5.png",
+    "index.html": "/github.io/mobileMockup/index.html",
+    "main.dcfd07d1.css.map": "/github.io/mobileMockup/static/css/main.dcfd07d1.css.map",
+    "main.52d44224.js.map": "/github.io/mobileMockup/static/js/main.52d44224.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.dcfd07d1.css",
+    "static/js/main.52d44224.js"
+  ]
+}
