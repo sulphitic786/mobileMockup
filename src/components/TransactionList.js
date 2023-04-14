@@ -1,24 +1,64 @@
 import React, { useContext } from "react";
-import { BudgetContext } from "../context/budget-context";
 import { Box, Text } from "@chakra-ui/layout";
-import { Icon, Circle } from "@chakra-ui/react";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { FaRupeeSign } from "react-icons/fa";
-import { FaBitcoin } from "react-icons/fa";
+import { Icon, Circle, Heading } from "@chakra-ui/react";
 import { List, ListItem, IconButton } from "@chakra-ui/react";
-import { useToast } from "@chakra-ui/toast";
-import { useNavigate } from "react-router-dom";
 import { FaHistory } from "react-icons/fa";
 import btc from "../assets/btc.png";
 import usdt from "../assets/usdt.png";
 import bnb from "../assets/bnb.png";
 import usdc from "../assets/usdc.png";
 import matic from "../assets/matic.png";
+import send from "../assets/send.png";
+import qrcode from "../assets/qrcode.png";
 import { Image } from "@chakra-ui/react";
 
 const TransactionList = () => {
-  const { transactions, deleteTransaction, findTransaction } =
-    useContext(BudgetContext);
+
+    const cehnnalList = [
+      {
+        amount: 500,
+        category: "BTC",
+        type: "Income",
+        date: "2022-01-26",
+        percent: -0.02,
+        id: "44c68123-5b86-4cc8-b915-bb9e16cebe6a",
+      },
+      {
+        amount: 250,
+        category: "USDT",
+        type: "Expense",
+        date: "2022-01-30",
+        percent: 0.01,
+        id: "c5647dde-d857-463d-8b4e-1c866cc5f83e",
+      },
+      {
+        amount: 125,
+        category: "BNB",
+        type: "Income",
+        date: "2022-01-26",
+        percent: -0.02,
+        id: "33b295b8-a8cb-49f0-8f0d-bb268686de1a",
+      },
+      {
+        amount: 150,
+        category: "USDC",
+        type: "Income",
+        date: "2022-01-23",
+        percent: 0.01,
+        id: "270304a8-b11d-4e16-9341-33df641ede64",
+      },
+     
+      {
+        amount: 120,
+        category: "MATIC",
+        type: "Expense",
+        date: "2022-01-30",
+        percent: -0.02,
+        id: "0f72e66e-e144-4a72-bbc1-c3c92018635e",
+      },
+    
+     
+    ];
 
   return (
     <List
@@ -51,10 +91,9 @@ const TransactionList = () => {
         borderRadius="1em"
         style={{position:"relative", marginTop: "-45px"}}
        >
-        <Box 
+        <Box cursor={"pointer"}
         >
-        <Icon color="gray.100" as={FaHistory} />
-        {/* <Icon as={TbSend} /> */}
+        <Image mx={"auto"} width={"30px"} height="30px" src={send} />
           <Text
           size="lg"
           color="gray.100"
@@ -62,8 +101,8 @@ const TransactionList = () => {
           Send</Text>
         </Box>
         <Text color="white" fontWeight={"light"} fontSize="40px">|</Text>
-       <Box>
-       <Icon color="gray.100" as={"FaHistory"} />
+       <Box cursor={"pointer"}>
+       <Image mx={"auto"} width={"30px"} height="30px" src={qrcode} alt="qr_code" />
         <Text
         size="lg"
         color="gray.100"
@@ -71,8 +110,9 @@ const TransactionList = () => {
         Recieved</Text>
        </Box>
        <Text color="white" fontWeight={"light"} fontSize="40px">|</Text>
-       <Box>
-        <Icon color="gray.100" as={"FaHistory"} />
+       
+       <Box cursor={"pointer"}>
+        <Icon fontSize={"25px"} color="gray.100" as={FaHistory} />
         <Text
         size="lg"
         color="gray.100"
@@ -81,9 +121,29 @@ const TransactionList = () => {
        </Box>
       </Box>
 
-      {transactions.map((transaction) => (
+      <Box
+        d="flex"
+        justifyContent="space-between"
+        py={"1.2em"}
+        px={3}
+        width={"100%"}
+        alignItems="center"
+        >
+        <Heading
+          color="white"
+          as={"h2"}
+          size='lg'
+          >
+          Coin List
+        </Heading>
+        <Text _hover={{color:"green.200"}} cursor={"pointer"} fontWeight="normal" color="#f1f1f1" fontSize="md">
+          + Import Token
+        </Text>
+      </Box>
+
+      {cehnnalList.map((channal) => (
         <ListItem
-          key={transaction.id}
+          key={channal.id}
           d="flex"
           alignItems="center"
           justifyContent="space-between"
@@ -104,17 +164,17 @@ const TransactionList = () => {
           >
             <Circle
               size="50px"
-              bg={transaction.type === "Income" ? "green.500" : "red.500"}
+              bg={channal.type === "Income" ? "green.500" : "red.500"}
               color="white"
               fontSize="xl"
             >
-              {transaction.category=="BTC"?
+              {channal.category=="BTC"?
               <Image src={btc} borderRadius="50%" alt='Dan Abramov' />
-              : transaction.category=="USDT"?
+              : channal.category=="USDT"?
               <Image src={usdt} borderRadius="50%" alt='Dan Abramov' />
-              : transaction.category=="BNB"?
+              : channal.category=="BNB"?
               <Image src={bnb} borderRadius="50%" alt='Dan Abramov' />
-              : transaction.category=="USDC"?
+              : channal.category=="USDC"?
               <Image src={usdc} borderRadius="50%" alt='Dan Abramov' />
               :
               <Image src={matic} borderRadius="50%" alt='Dan Abramov' />
@@ -126,23 +186,23 @@ const TransactionList = () => {
               alignItems="start"
               alignSelf="start"
               gap="1.75px"
+              px={3}
             >
               <Box d="flex">
               <Text fontWeight="bold" color="#f1f1f1" fontSize="lg">
-                {transaction.category}
+                {channal.category}
               </Text>
               <Text fontWeight="bold" fontSize="sm" alignSelf="center" ms="2"
-                color={transaction.percent<0? "#d74144": "#0e8c72"}
+                color={channal.percent<0? "#d74144": "#0e8c72"}
                 >
-                {transaction.percent}</Text>
+                {channal.percent}</Text>
               </Box>
               
               <Text alignItems="left" color="#858897" fontWeight="bold" fontSize="xs">
-                {`$${transaction.amount}`}
+                {`$${channal.amount}`}
               </Text>
             </Box>
           </Box>
-          
           <Box>
 
 
@@ -150,6 +210,7 @@ const TransactionList = () => {
               d="flex"
               flexDir="column"
               gap="1.75px"
+              px={3}
             >
               <Box d="flex">
               <Text fontWeight="bold" alignItems="left" fontSize="sm" color="#f1f1f1" alignSelf="center" ms="2">

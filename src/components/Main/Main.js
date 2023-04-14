@@ -1,15 +1,14 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Box, } from "@chakra-ui/layout";
 import { Heading } from "@chakra-ui/react";
-import { BudgetContext } from "../../context/budget-context";
-import Form from "./Form/Form";
 import { Text } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/react";
+import { FaHome } from "react-icons/fa";
 import TransactionList from "../TransactionList";
 import { Select } from "@chakra-ui/react/dist/chakra-ui-react.cjs";
-// import TbSend from "react-icons";
-import { FaHistory } from "react-icons/fa";
-// import IoQrCodeSharp from "react-icons";
+import { SettingsIcon } from "@chakra-ui/icons";
+import { Image } from "@chakra-ui/react";
+import doubleArrow from "../../assets/doubleArrow.png"
 
 const Main = () => {
   return (
@@ -33,7 +32,7 @@ const Main = () => {
         justifyContent="left"
         color="white"
         value="Type"
-        width="35%"
+        width="30%"
         onChange={34}
         mt={5}
         // bg="purple"
@@ -96,30 +95,30 @@ const Main = () => {
        py="3"
        mx="auto"
        >
-        <Box>
-        <Icon color="gray.100" as={FaHistory} />
+        <Box cursor="pointer">
+        <Icon fontSize={"25px"} color="gray.100" as={FaHome} />
         {/* <Icon as={TbSend} /> */}
           <Text
           size="lg"
           color="gray.100"
           >
-          Send</Text>
+          Home</Text>
         </Box>
-       <Box>
-       <Icon color="gray.100" as={FaHistory} />
+       <Box className="centerHome"
+        p="10px"
+        cursor="pointer"
+        borderRadius={"50%"}
+        bg="#232234"
+        style={{position:"relative", top:"-35px"}}
+        >
+        <Image src={doubleArrow} width={"40px"} height={"40px"} borderRadius="50%" alt='Dan Abramov' />       </Box>
+       <Box cursor="pointer">
+        <Icon color="#858897" fontSize={"25px"} as={SettingsIcon} />
         <Text
         size="lg"
-        color="gray.100"
+        color="#858897"
         >
-        Recieved</Text>
-       </Box>
-       <Box>
-        <Icon color="gray.100" as={FaHistory} />
-        <Text
-        size="lg"
-        color="gray.100"
-        >
-        History</Text>
+        Setting</Text>
        </Box>
       </Box>
       

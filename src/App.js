@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
-import TransactionPage from "./Pages/TransactionPage";
+import TransactionPage from "./components/Main/TransactionPage"
 
 function App() {
   return (

@@ -1,16 +1,8 @@
 import React, { useContext } from "react";
 import { Box } from "@chakra-ui/react";
-import HeaderBar from "../components/HeaderBar";
-import Details from "../components/Details/Details";
-import Main from "../components/Main/Main";
-import { BudgetContext } from "../context/budget-context";
-//import { useNavigate } from "react-router-dom";
-import Alerts from "../components/Alerts";
+import Main from "./Main";
 
 const TransactionPage = () => {
-  const { user } = useContext(BudgetContext);
-
-  //const navigate = useNavigate();
 
   return (
     <React.Fragment>
@@ -24,7 +16,8 @@ const TransactionPage = () => {
               justifyContent="center"
               textAlign="center"
               pt={2}
-              m={3}
+              my="2"
+              mx={"auto"}
               borderRadius="md"
               border="1.5px solid black"
               alignSelf={{ base: "center", md: "flex-start" }}
